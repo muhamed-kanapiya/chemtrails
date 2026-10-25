@@ -6,7 +6,7 @@ export const CITIES = [
   { name: 'Нью-Йорк', country: 'США', lat: 40.7128, lon: -74.006, timezone: 'America/New_York' },
 ];
 export const finite = value => typeof value === 'number' && Number.isFinite(value);
-export const fmt = (value, digits = 0) => finite(value) ? value.toLocaleString('ru-RU', { maximumFractionDigits: digits }) : '—';
+export const fmt = (value, digits = 0) => finite(value) ? (Math.abs(value) < .5 * 10 ** -digits ? 0 : value).toLocaleString('ru-RU', { maximumFractionDigits: digits }) : '—';
 export function localTime(unix, timezone = 'UTC', date = false) {
   if (!finite(unix)) return '—';
   return new Intl.DateTimeFormat('ru-RU', { timeZone: timezone, hour: '2-digit', minute: '2-digit', ...(date ? { day: 'numeric', month: 'short' } : {}) }).format(new Date(unix * 1000));

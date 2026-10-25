@@ -7,7 +7,8 @@ export async function getJson(url, signal) {
 }
 export async function getAircraft(city, radius, signal) {
   const proxy = import.meta.env.VITE_FLIGHT_PROXY;
-  const base = proxy ? `${proxy.replace(/\/$/,'')}/flights?lat=${city.lat}&lon=${city.lon}&radius=${radius}` : import.meta.env.DEV ? `/api/flights?lat=${city.lat}&lon=${city.lon}&radius=${radius}` : null;
+  const local = import.meta.env.DEV || window.__NEBOSVOD_LOCAL__ === true;
+  const base = local ? `/api/flights?lat=${city.lat}&lon=${city.lon}&radius=${radius}` : proxy ? `${proxy.replace(/\/$/,'')}/flights?lat=${city.lat}&lon=${city.lon}&radius=${radius}` : null;
   if (!base) throw new Error('Прямой эфир ещё не подключён. Используйте демо или откройте живую карту ADSB.lol.');
   const data = await getJson(base, signal);
   if (!Array.isArray(data.ac || data.aircraft)) throw new Error('Источник не вернул список самолётов.');

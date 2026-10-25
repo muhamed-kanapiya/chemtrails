@@ -48,6 +48,7 @@ export default function MapView({ city, radius, aircraft, selected, onSelect, si
     tracks.current.clear();
   }, [city, radius]);
   useEffect(() => {
+    root.current.classList.toggle('dense-airspace', aircraft.length > 20);
     const alive = new Set(aircraft.map(a => a.id));
     markers.current.forEach((marker, id) => { if (!alive.has(id)) { marker.remove(); markers.current.delete(id); tracks.current.delete(id); } });
     aircraft.forEach(a => {
@@ -89,7 +90,7 @@ export default function MapView({ city, radius, aircraft, selected, onSelect, si
   }, [wind,showWind,city,radius]);
   useEffect(() => {
     if (!focusSignal) return;
-    if (simulation) map.current.fitBounds(L.latLngBounds([simulation.source.lat,simulation.source.lon],simulation.result.center).extend(L.circle(simulation.result.center,{radius:simulation.result.radius}).getBounds()), {padding:[45,45],maxZoom:11});
+    if (simulation) map.current.fitBounds(L.latLngBounds([simulation.source.lat,simulation.source.lon],simulation.result.center).extend(L.latLng(simulation.result.center).toBounds(simulation.result.radius * 2)), {padding:[45,45],maxZoom:11});
     else if (selected) map.current.setView([selected.lat,selected.lon],11);
   }, [focusSignal]);
   return <div className="map-shell">

@@ -18,3 +18,6 @@ main{max-width:1730px;margin:0 auto;padding:31px 33px 20px}.page-heading{display
 .muted-map .leaflet-tile-pane{filter:saturate(.18) brightness(1.06) contrast(.91)}
 
 .live-help{padding:7px 0 12px}.live-help a{font-size:10px;display:inline-flex;align-items:center;gap:5px}
+
+.aircraft-pin>span{width:24px;height:24px;margin:4px}.aircraft-pin.selected>span{width:28px;height:28px;margin:2px}.dense-airspace .aircraft-pin b{opacity:0;pointer-events:none}.dense-airspace .aircraft-pin:hover b,.dense-airspace .aircraft-pin.selected b,.dense-airspace .plane-marker:focus b{opacity:1}.data-note{font-size:10px;color:#758c97}.source-status{font-size:9px;color:#7d929c}.map-footer{font-size:10px;color:#758e9a}.pollutant-list strong small{color:#7d939e}.range-ticks{color:#7c929d}.flight-table th{color:#7c929e}.flight-table td small{color:#7d939e}
+
